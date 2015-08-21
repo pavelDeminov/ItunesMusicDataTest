@@ -41,6 +41,7 @@ static NSString *const kMethodUserTreasures = @"search";
 {
     self = [super init];
     if (self != nil) {
+        
         _APIURL = @"https://itunes.apple.com/";
     }
     return self;
@@ -90,11 +91,11 @@ static NSString *const kMethodUserTreasures = @"search";
         _manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:_APIURL]];
         _manager.requestSerializer = [AFJSONRequestSerializer serializer];
         _manager.securityPolicy.allowInvalidCertificates = YES;
-        //_manager.shouldUseCredentialStorage = NO;
+        _manager.securityPolicy.validatesDomainName = NO;
+        
         [_manager setRequestSerializer:[AFJSONRequestSerializer serializer]];
     }
-//    DLog(@"Authorization: %@",self.tokenInfo.accessToken);
-//    [_manager.requestSerializer setValue:self.tokenInfo.isValidToken ? self.tokenInfo.accessToken : @"" forHTTPHeaderField:@"Authorization"];
+
     
     return _manager;
 }
